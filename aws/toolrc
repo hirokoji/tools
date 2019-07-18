@@ -1,0 +1,11 @@
+#!/bin/bash
+if [ -z "$1" ]
+  then
+    echo "Please specify stackname like 'source toolrc <stack-name>'"
+fi
+
+stackInfo=$(aws cloudformation describe-stacks --stack-name $1)
+export targetGroupArn=$(echo $stackInfo | jq  -r '.Stacks[0].Outputs[0].OutputValue')
+export clusterName=$(echo $stackInfo | jq  -r '.Stacks[0].Outputs[4].OutputValue')
+export serviceName=$(echo $stackInfo | jq  -r '.Stacks[0].Outputs[5].OutputValue')
+
