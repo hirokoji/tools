@@ -12,9 +12,8 @@ if [ -z "$2" ]
 fi
 
 
-
-currentTime=$(date +"%Y-%m-%dT%TZ")
-beforeTime=$(date -v -1M +"%Y-%m-%dT%TZ")
+currentTime=$(date -u +"%Y-%m-%dT%TZ")
+beforeTime=$(date -u -v -2M +"%Y-%m-%dT%TZ")
 clusterName=$1
 serviceName=$2
 #clusterName="drgdoesitwork-arms	"
