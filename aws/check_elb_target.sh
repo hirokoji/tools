@@ -6,7 +6,7 @@ if [ -z "$1" ]
     exit 1
 fi
 
-targetArn=$2
+targetArn=$1
 
 targetInfo=$(aws elbv2 describe-target-health --target-group-arn $targetArn )
 numOfTasks=$(echo $targetInfo | jq -r '.TargetHealthDescriptions | length')
