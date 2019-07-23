@@ -7,6 +7,11 @@ if [ -z "$1" ]
 fi
 
 cluster=$1
+service=arms-cloud-service
+
+# aws ecs list-tasks --cluster $cluster
+desiredCount=$(aws ecs describe-services --services arms-cloud-service --cluster $cluster | jq '.services[0].desiredCount')
+echo "Desired Count: ${desiredCount}"
 
 for task in `aws ecs list-tasks --cluster $cluster  | jq -r '.taskArns | .[]'`
 do
