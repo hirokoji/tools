@@ -26,7 +26,7 @@ while :
 do
     stackInfo=$(aws cloudformation describe-stacks --stack-name $1)
     export targetGroupArn=$(echo $stackInfo | jq  -r '.Stacks[0].Outputs[0].OutputValue')
-    export clusterName=$(echo $stackInfo | jq  -r '.Stacks[0].Outputs[4].OutputValue')
+    export clusterName=$(echo $stackInfo | jq  -r '.Stacks[0].Outputs[4].OutputValue' | sed -e s/arn.*cluster// | tr -d /)
     export serviceName=$(echo $stackInfo | jq  -r '.Stacks[0].Outputs[5].OutputValue')
 
     echo "----"
